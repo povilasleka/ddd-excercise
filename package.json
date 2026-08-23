@@ -2,8 +2,10 @@
   "name": "media-delivery-system",
   "private": true,
   "scripts": {
-    "build": "pnpm -r run build",
-    "dev": "pnpm -r --parallel run dev",
+    "build:dev": "pnpm -r run build",
+    "start:dev": "pnpm -r --parallel run dev",
+    "db:up:dev": "docker compose up -d postgres",
+    "db:down:dev": "docker compose down",
     "lint": "pnpm -r run lint",
     "format": "pnpm -r run format",
     "format:check": "pnpm -r run format:check",
@@ -11,6 +13,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@types/node": "^22.20.1",
     "eslint": "^10.8.1",
     "eslint-config-prettier": "^10.1.8",
     "globals": "^17.11.0",
