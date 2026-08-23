@@ -23,6 +23,16 @@ export const revisions = pgTable('revisions', {
   ...timestamps,
 });
 
+export const revisionItems = pgTable('revision_items', {
+  id: uuid('id').primaryKey().defaultRandom(),
+  revisionId: uuid('revision_id')
+    .notNull()
+    .references(() => revisions.id),
+  playbackPosition: integer('playback_position').notNull(),
+  comment: text('comment').notNull(),
+  ...timestamps,
+});
+
 export const projectsRelations = relations(projects, ({ many }) => ({
   revisions: many(revisions),
 }));
@@ -31,5 +41,12 @@ export const revisionsRelations = relations(revisions, ({ one }) => ({
   project: one(projects, {
     fields: [revisions.projectId],
     references: [projects.id],
+  }),
+}));
+
+export const revisionItemsRelations = relations(revisionItems, ({ one }) => ({
+  revision: one(revisions, {
+    fields: [revisionItems.revisionId],
+    references: [revisions.id],
   }),
 }));
