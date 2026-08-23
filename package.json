@@ -1,6 +1,7 @@
 {
   "name": "media-delivery-system",
   "private": true,
+  "type": "module",
   "scripts": {
     "build:dev": "pnpm -r run build",
     "start:dev": "pnpm -r --parallel run dev",
