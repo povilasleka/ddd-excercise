@@ -1,15 +1,13 @@
-import type { ProjectRepository } from "../../ports/project-repository.ts";
+import type { ProjectRepository } from '../../ports/project-repository.ts';
 
 export interface RemoveProjectInput {
-    projectId: string;
+  projectId: string;
 }
 
 export class RemoveProjectUseCase {
-    constructor(
-        private readonly repository: ProjectRepository,
-    ) {}
+  constructor(private readonly repository: ProjectRepository) {}
 
-    async execute(input: RemoveProjectInput) {
-        await this.repository.delete(input.projectId);
-    }
+  async execute(input: RemoveProjectInput) {
+    await this.repository.delete(input.projectId);
+  }
 }
