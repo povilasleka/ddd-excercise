@@ -1,15 +1,18 @@
 import { BaseEntity } from "../shared/base-entity.ts";
-import type { RevisionItem } from "../revision-item/revision-item.entity.ts";
+import { RevisionItem } from "../revision-item/revision-item.entity.js";
 import { MediaAssetNotFoundError, RevisionItemNotFoundError } from "./revision.errors.ts";
 import type { MediaAsset } from "../media-asset/media-asset.entity.ts";
+import type { PlaybackPosition } from "../revision-item/revision-item.value-objects.ts";
 
 export interface CreateRevisionProps {
+    projectId: string;
     version: string;
     description: string;
 }
 
 export interface RehydrateRevisionProps {
     id: string;
+    projectId: string;
     version: string;
     description: string;
     assets: MediaAsset[];
@@ -18,9 +21,15 @@ export interface RehydrateRevisionProps {
     updatedAt: Date;
 }
 
+export interface AddRevisionItemProps {
+    playbackPosition: PlaybackPosition;
+    comment: string;
+}
+
 export class Revision extends BaseEntity {
     private constructor(
         id: string,
+        private readonly projectId: string,
         private readonly version: string,
         private readonly description: string,
         private readonly assets: MediaAsset[] = [],
@@ -34,6 +43,7 @@ export class Revision extends BaseEntity {
     static create(props: CreateRevisionProps): Revision {
         return new Revision(
             crypto.randomUUID(),
+            props.projectId,
             props.version,
             props.description
         );
@@ -42,6 +52,7 @@ export class Revision extends BaseEntity {
     static rehydrate(props: RehydrateRevisionProps): Revision {
         return new Revision(
             props.id,
+            props.projectId,
             props.version,
             props.description,
             props.assets,
@@ -69,8 +80,11 @@ export class Revision extends BaseEntity {
         this.touch();
     }
 
-    addRevisionItem(revisionItem: RevisionItem): void {
-        this.revisionItems.push(revisionItem);
+    addRevisionItem(props: AddRevisionItemProps): void {
+        this.revisionItems.push(RevisionItem.create({
+            playbackPosition: props.playbackPosition,
+            comment: props.comment,
+        }));
         this.touch();
     }
 

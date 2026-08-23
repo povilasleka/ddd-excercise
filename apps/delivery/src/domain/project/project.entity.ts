@@ -1,6 +1,4 @@
 import { BaseEntity } from "../shared/base-entity.ts";
-import type { Revision } from "../revision/revision.entity.ts";
-import { RevisionNotFoundError } from "./project.errors.ts";
 
 export interface CreateProjectProps {
     title: string;
@@ -15,7 +13,6 @@ export interface RehydrateProjectProps {
     description: string;
     thumbnailUrl: string;
     clientLogoUrl: string;
-    revisions: Revision[];
     createdAt: Date;
     updatedAt: Date;
 }
@@ -27,7 +24,6 @@ export class Project extends BaseEntity {
         private readonly description: string,
         private readonly thumbnailUrl: string,
         private readonly clientLogoUrl: string,
-        private readonly revisions: Revision[] = [],
         createdAt?: Date,
         updatedAt?: Date,
     ) {
@@ -51,7 +47,6 @@ export class Project extends BaseEntity {
             props.description,
             props.thumbnailUrl,
             props.clientLogoUrl,
-            props.revisions,
             props.createdAt,
             props.updatedAt,
         )
@@ -61,20 +56,4 @@ export class Project extends BaseEntity {
     getDescription = () => this.description;
     getThumbnailUrl = () => this.thumbnailUrl;
     getClientLogoUrl = () => this.clientLogoUrl;
-    getIterations = () => this.revisions;
-
-    addIteration(revision: Revision): void {
-        this.revisions.push(revision);
-        this.touch();
-    }
-
-    removeIteration(revisionId: string): void {
-        const index = this.revisions.findIndex((iteration) => iteration.getId() === revisionId);
-        if (index === -1) {
-            throw new RevisionNotFoundError(revisionId);
-        }
-
-        this.revisions.splice(index, 1);
-        this.touch();
-    }
 }
