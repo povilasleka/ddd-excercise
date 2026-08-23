@@ -1,5 +1,5 @@
 import { BaseEntity } from "../shared/base-entity.ts";
-import { RevisionItem } from "../revision-item/revision-item.entity.js";
+import { RevisionItem } from "../revision-item/revision-item.entity.ts";
 import { MediaAssetNotFoundError, RevisionItemNotFoundError } from "./revision.errors.ts";
 import type { MediaAsset } from "../media-asset/media-asset.entity.ts";
 import type { PlaybackPosition } from "../revision-item/revision-item.value-objects.ts";
@@ -64,6 +64,9 @@ export class Revision extends BaseEntity {
 
     getVersion = () => this.version;
     getDescription = () => this.description;
+    getProjectId = () => this.projectId;
+    getAssets = (): readonly MediaAsset[] => [...this.assets];
+    getRevisionItems = (): readonly RevisionItem[] => [...this.revisionItems];
 
     addMediaAsset(asset: MediaAsset): void {
         this.assets.push(asset);
