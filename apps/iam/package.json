@@ -1,0 +1,30 @@
+{
+  "name": "@mds/iam",
+  "version": "0.1.0",
+  "private": true,
+  "main": "dist/infrastructure/http/index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/infrastructure/http/index.ts",
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "db:generate": "tsx ../../shared/scripts/drizzle/create-migration.ts",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio"
+  },
+  "dependencies": {
+    "@shared/domain": "workspace:*",
+    "dotenv": "^16.4.7",
+    "drizzle-orm": "^0.39.3",
+    "express": "^5.2.1",
+    "postgres": "^3.4.5"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.30.4",
+    "@types/express": "^5.0.6"
+  }
+}

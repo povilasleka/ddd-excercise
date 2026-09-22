@@ -49,21 +49,11 @@ importers:
         specifier: ^22.20.1
         version: 22.20.1
 
-  apps/billing:
+  apps/iam:
     dependencies:
-      express:
-        specifier: ^5.2.1
-        version: 5.2.1
-    devDependencies:
-      '@types/express':
-        specifier: ^5.0.6
-        version: 5.0.6
-      '@types/node':
-        specifier: ^22.20.1
-        version: 22.20.1
-
-  apps/delivery:
-    dependencies:
+      '@shared/domain':
+        specifier: workspace:*
+        version: link:../../shared/domain
       dotenv:
         specifier: ^16.4.7
         version: 16.6.1
@@ -102,6 +92,8 @@ importers:
       '@types/node':
         specifier: ^22.20.1
         version: 22.20.1
+
+  shared/domain: {}
 
 packages:
 

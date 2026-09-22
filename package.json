@@ -5,7 +5,7 @@
   "scripts": {
     "build:dev": "pnpm -r run build",
     "start:dev": "pnpm -r --parallel run dev",
-    "db:up:dev": "docker compose up -d postgres",
+    "db:up:dev": "docker compose up -d postgres postgres-iam",
     "db:down:dev": "docker compose down",
     "db:generate:dev": "pnpm -r run db:generate",
     "db:migrate:dev": "pnpm -r run db:migrate",
@@ -14,7 +14,7 @@
     "lint": "pnpm -r run lint",
     "format": "pnpm -r run format",
     "format:check": "pnpm -r run format:check",
-    "typecheck": "pnpm -r run typecheck"
+    "typecheck": "tsc --noEmit && pnpm -r run typecheck"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
