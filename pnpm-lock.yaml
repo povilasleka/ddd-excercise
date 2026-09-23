@@ -51,9 +51,9 @@ importers:
 
   apps/iam:
     dependencies:
-      '@shared/domain':
+      '@packages/common':
         specifier: workspace:*
-        version: link:../../shared/domain
+        version: link:../../packages/common
       dotenv:
         specifier: ^16.4.7
         version: 16.6.1
@@ -93,7 +93,7 @@ importers:
         specifier: ^22.20.1
         version: 22.20.1
 
-  shared/domain: {}
+  packages/common: {}
 
 packages:
 

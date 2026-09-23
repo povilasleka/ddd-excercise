@@ -1,31 +1,20 @@
-import express, { type Express, type NextFunction, type Request, type Response } from 'express';
-import { getConfig } from '@/config/config.js';
-import { buildDrizzleClient } from '@/infrastructure/postgres/client.js';
-import { DrizzleUserRepository } from '@/infrastructure/postgres/user-repository.js';
-import { RegisterUserUseCase } from '@/application/register-user/register-user.use-case.js';
+import express, { type Express, type Request, type Response } from 'express';
 import { errorHandler } from './error-handler.ts';
+import { createUserRouter, type UserRouterDependencies } from './router.ts';
 
-const config = getConfig();
-const { db } = buildDrizzleClient(config.databaseUrl);
+export type AppDependencies = UserRouterDependencies;
 
-const userRepository = new DrizzleUserRepository(db);
-const registerUserUseCase = new RegisterUserUseCase(userRepository);
+export function initExpressApp(dependencies: AppDependencies): Express {
+  const app: Express = express();
+  app.use(express.json());
 
-const app: Express = express();
-app.use(express.json());
+  app.get('/', (_req: Request, res: Response) => {
+    res.send('Hello World!');
+  });
 
-app.get('/', (_req: Request, res: Response) => {
-  res.send('Hello World!');
-});
+  app.use(createUserRouter(dependencies));
 
-app.post('/users', (req: Request, res: Response, next: NextFunction) => {
-  registerUserUseCase
-    .execute(req.body)
-    .then((user) => res.status(201).json(user))
-    .catch(next);
-});
+  app.use(errorHandler);
 
-app.use(errorHandler);
-
-const port = process.env.PORT || 3003;
-app.listen(port);
+  return app;
+}

@@ -1,4 +1,4 @@
-import type { Brand } from '@shared/domain/brand.ts';
+import type { Brand } from '@packages/common';
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 

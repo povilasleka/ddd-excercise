@@ -1,5 +1,5 @@
 import type { ErrorRequestHandler } from 'express';
-import { BaseError } from '@shared/domain/base-error.js';
+import { BaseError } from '@packages/common';
 
 export const errorHandler: ErrorRequestHandler = (err: Error, _req, res, _next) => {
   if (err instanceof BaseError) {

@@ -4,5 +4,5 @@
     "types": ["node"],
     "noEmit": true
   },
-  "include": ["shared/**/*", "*.config.ts", "*.config.mjs"]
+  "include": ["packages/common/**/*", "*.config.ts", "*.config.mjs"]
 }

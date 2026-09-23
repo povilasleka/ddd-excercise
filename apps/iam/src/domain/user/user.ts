@@ -1,7 +1,4 @@
-import type { Brand } from '@shared/domain/brand.ts';
-import type { Change } from '@shared/domain/change.ts';
-import type { DomainEntity } from '@shared/domain/domain-entity.ts';
-import { err, ok, type Result } from '@shared/domain/result.ts';
+import { err, ok, type Brand, type Change, type DomainEntity, type Result } from '@packages/common';
 import type { UserEvent } from './user-events.ts';
 import { UserStatus } from './user-status.js';
 import { UserEmail } from './user-email.js';

@@ -1,6 +1,6 @@
 import type { UserId } from './user.ts';
 import type { UserStatus } from './user-status.ts';
-import type { DomainEvent } from '@shared/domain/event.ts';
+import type { DomainEvent } from '@packages/common';
 
 export type UserCreated = DomainEvent<{
   type: 'UserCreated';

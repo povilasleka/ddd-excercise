@@ -1,6 +1,6 @@
-import { User } from '@/domain/user/user.js';
+import { User } from '../../domain/user/user.ts';
 import { EmailAlreadyTakenError, InvalidEmailError } from './register-user.errors.ts';
-import type { UserRepository } from '@/domain/user/ports/user-repository.js';
+import type { UserRepository } from '../../domain/user/ports/user-repository.ts';
 
 export interface RegisterUserInput {
   email: string;

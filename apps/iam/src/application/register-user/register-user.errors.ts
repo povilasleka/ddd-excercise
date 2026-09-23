@@ -1,4 +1,4 @@
-import { BaseError } from '@shared/domain/base-error.ts';
+import { BaseError } from '@packages/common';
 
 export class InvalidEmailError extends BaseError {
   constructor() {
