@@ -1,6 +1,6 @@
 import { eq } from 'drizzle-orm';
 import type { drizzle } from 'drizzle-orm/postgres-js';
-import type { UserRepository } from '@/domain/user/user-repository.js';
+import type { UserRepository } from '@/domain/user/ports/user-repository.js';
 import type { User, UserId } from '@/domain/user/user.js';
 import type { UserEmail } from '@/domain/user/user-email.js';
 import type { UserStatus } from '@/domain/user/user-status.js';

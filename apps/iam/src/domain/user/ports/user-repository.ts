@@ -1,4 +1,4 @@
-import type { User } from './user.ts';
+import type { User } from '@/domain/user/user.js';
 
 export interface UserRepository {
   findById(id: string): Promise<User | null>;

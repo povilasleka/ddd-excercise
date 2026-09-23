@@ -2,7 +2,8 @@ import express, { type Express, type NextFunction, type Request, type Response }
 import { getConfig } from '@/config/config.js';
 import { buildDrizzleClient } from '@/infrastructure/postgres/client.js';
 import { DrizzleUserRepository } from '@/infrastructure/postgres/user-repository.js';
-import { RegisterUserUseCase } from '@/application/use-cases/register-user/register-user.use-case.js';
+import { RegisterUserUseCase } from '@/application/register-user/register-user.use-case.js';
+import { errorHandler } from './error-handler.ts';
 
 const config = getConfig();
 const { db } = buildDrizzleClient(config.databaseUrl);
@@ -24,9 +25,7 @@ app.post('/users', (req: Request, res: Response, next: NextFunction) => {
     .catch(next);
 });
 
-app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
-  res.status(400).json({ code: 'code' in err ? err.code : 'BAD_REQUEST', message: err.message });
-});
+app.use(errorHandler);
 
 const port = process.env.PORT || 3003;
 app.listen(port);
