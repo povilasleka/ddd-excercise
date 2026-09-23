@@ -1,5 +1,5 @@
 {
-  "name": "@mds/api",
+  "name": "@apps/api",
   "version": "0.1.0",
   "private": true,
   "main": "dist/index.js",
@@ -13,9 +13,11 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
+    "@trpc/client": "^11.19.0",
     "express": "^5.2.1"
   },
   "devDependencies": {
+    "@apps/iam": "workspace:*",
     "@types/express": "^5.0.6",
     "@types/node": "^22.20.1"
   }

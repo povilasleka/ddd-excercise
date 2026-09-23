@@ -1,6 +1,6 @@
 import { defineConfig } from 'drizzle-kit';
 import 'dotenv/config';
-import { getConfig } from './src/config/config.ts';
+import { getConfig } from './src/config.ts';
 
 const config = getConfig();
 
